@@ -1,3 +1,5 @@
+-- IGNORE FROM HERE (previous tables) ----------
+
 -- standardize the data
 update laliga_matches_23_24
 set Score = REPLACE(Score, '__', '_')
@@ -19,6 +21,8 @@ set `UTC Time` = left(`UTC Time`, 10)
 -- change to dd-mm-yyyy from yyyy-mm-dd
 update laliga_matches_23_24
 set `UTC Time` = date_format(str_to_date(`UTC Time`, '%Y-%m-%d'), '%d-%m-%Y')
+
+-- TO HERE ----------
 
 -- standardize the column values across the tables
 update laliga_matches 
