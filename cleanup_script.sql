@@ -1,29 +1,3 @@
--- IGNORE FROM HERE (previous tables) ----------
-
--- standardize the data
-update laliga_matches_23_24
-set Score = REPLACE(Score, '__', '_')
-where Score like '%__%'
-
--- split the home/away goals in two columns
-alter table laliga_matches_23_24 add column FTHG INT
-alter table laliga_matches_23_24 add column FTAG INT
-update laliga_matches_23_24
-set 
-	FTHG = CAST(substring_index(Score, '_', 1) as unsigned),
-	FTAG = cast(substring_index(Score, '_', -1) as unsigned)
-	where Score like '%_%'
-
--- update the UTC column in laliga_matches to just get the date
-update laliga_matches_23_24
-set `UTC Time` = left(`UTC Time`, 10)
-
--- change to dd-mm-yyyy from yyyy-mm-dd
-update laliga_matches_23_24
-set `UTC Time` = date_format(str_to_date(`UTC Time`, '%Y-%m-%d'), '%d-%m-%Y')
-
--- TO HERE ----------
-
 -- standardize the column values across the tables
 update laliga_matches 
 set HomeTeam = 'Athletico Madrid'
