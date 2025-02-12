@@ -46,4 +46,4 @@ if st.button("Predict Outcome"):
     result_map = {0: f"{home_team} will lose", 1: f"{home_team} will win"}
     st.success(f"🔮 {result_map[prediction[0]]}")
 
-st.write("📊 Powered by Machine Learning ⚡")
+st.write("Powered using data from Kaggle")
